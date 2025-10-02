@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using NetStreamFlowKafka.Models;
 using NetStreamFlowKafka.Services;
+using System.Runtime.CompilerServices;
 
 namespace NetStreamFlowKafka;
-
 public static class EventsApi
 {
     public static RouteGroupBuilder MapEventsApi(this RouteGroupBuilder group)

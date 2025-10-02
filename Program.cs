@@ -21,7 +21,7 @@ builder.Services.AddSwaggerGen(c =>
 builder.Services.Configure<KafkaSettings>(builder.Configuration.GetSection("Kafka"));
 
 // Register services
-builder.Services.AddSingleton<IEventStore, InMemoryEventStore>();
+builder.Services.AddSingleton<IEventStore, InMemoryEventStore>(); // In-memory event store needs to be singleton
 builder.Services.AddSingleton<IKafkaProducerService, KafkaProducerService>();
 builder.Services.AddHostedService<KafkaConsumerService>();
 
