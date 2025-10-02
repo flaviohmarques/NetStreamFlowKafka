@@ -12,41 +12,19 @@ A scalable microservice demonstrating event-driven architecture using .NET 8, Ap
 
 ---
 
-## ?? Overview
+## Overview
 
 NetStreamFlowKafka is a production-ready reference implementation showcasing how to build event-driven microservices. The service processes user activity events asynchronously through Kafka, demonstrating best practices in distributed systems design.
 
-## ??? Architecture
-
-```
-???????????????      ????????????????      ???????????????
-?   Client    ????????  REST API    ????????   Kafka     ?
-?             ?      ?  (Producer)  ?      ?   Topic     ?
-???????????????      ????????????????      ???????????????
-                                                   ?
-                                                   ?
-                                                   ?
-                                            ???????????????
-                                            ?   Kafka     ?
-                                            ?  Consumer   ?
-                                            ???????????????
-                                                   ?
-                                                   ?
-                                            ???????????????
-                                            ?  In-Memory  ?
-                                            ?    Store    ?
-                                            ???????????????
-```
-
 ## Features
 
-- ? **Event Publishing**: REST API endpoint to publish user activity events
-- ? **Async Processing**: Kafka-based asynchronous event processing
-- ? **Event Storage**: Thread-safe in-memory event store using `ConcurrentBag`
-- ? **Event Querying**: REST API endpoints to query processed events
-- ? **Scalable Design**: Clean architecture with dependency injection
-- ? **Error Handling**: Comprehensive error handling and logging
-- ? **Background Processing**: `BackgroundService` for continuous event consumption
+-  **Event Publishing**: REST API endpoint to publish user activity events
+-  **Async Processing**: Kafka-based asynchronous event processing
+-  **Event Storage**: Thread-safe in-memory event store using `ConcurrentBag`
+-  **Event Querying**: REST API endpoints to query processed events
+-  **Scalable Design**: Clean architecture with dependency injection
+-  **Error Handling**: Comprehensive error handling and logging
+-  **Background Processing**: `BackgroundService` for continuous event consumption
 
 ## Technologies Used
 
@@ -55,22 +33,6 @@ NetStreamFlowKafka is a production-ready reference implementation showcasing how
 - Confluent.Kafka (2.3.0)
 - Swagger/OpenAPI
 - Docker & Docker Compose
-
-## ?? Project Structure
-
-```
-NetStreamFlowKafka/
-??? EventsApi.cs                     # Minimal API endpoints
-??? Models/
-?   ??? UserActivityEvent.cs         # Event model and settings
-??? Services/
-?   ??? InMemoryEventStore.cs        # Thread-safe event storage
-?   ??? KafkaProducerService.cs      # Kafka producer implementation
-?   ??? KafkaConsumerService.cs      # Background Kafka consumer
-??? Program.cs                       # Application entry point
-??? appsettings.json                 # Configuration
-??? NetStreamFlowKafka.csproj        # Project file
-```
 
 ## Getting Started
 
@@ -221,9 +183,6 @@ curl https://localhost:7000/api/events/user/user123
 
 ## Key Design Decisions
 
-### 1. **Async/Await Pattern**
-All I/O operations use async/await for better scalability and resource utilization.
-
 ### 2. **Thread-Safe Storage**
 `ConcurrentBag<T>` provides thread-safe operations without explicit locking.
 
@@ -254,20 +213,6 @@ Services are registered in the DI container for testability and maintainability:
 2. **Partition Strategy**: Events are keyed by `userId` for ordered processing per user
 3. **Backpressure Handling**: Consumer processes one message at a time with manual commits
 4. **State Management**: In-memory store can be replaced with Redis/Database for distributed deployments
-
-## Production Considerations
-
-For production deployment, consider:
-
-1. **Persistent Storage**: Replace `InMemoryEventStore` with a database (PostgreSQL, MongoDB)
-2. **Authentication**: Add JWT/OAuth for API endpoints
-3. **Rate Limiting**: Implement rate limiting on publish endpoint
-4. **Monitoring**: Add metrics (Prometheus, Application Insights)
-5. **Distributed Tracing**: Implement OpenTelemetry for request tracing
-6. **Configuration Management**: Use Azure Key Vault or AWS Secrets Manager
-7. **Health Checks**: Add Kafka connectivity health checks
-8. **Circuit Breaker**: Implement Polly for resilience
-9. **Dead Letter Queue**: Handle failed messages gracefully
 
 ## Monitoring and Observability
 
